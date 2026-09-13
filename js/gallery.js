@@ -1,7 +1,7 @@
 /* JG Construction — renders the gallery grid from js/photos.js (grouped by project) */
 
 (function () {
-  const CATEGORIES = ["Roofing", "Electrical & Cameras", "Decks", "Remodeling"];
+  const CATEGORIES = ["Roofing", "Electrical", "Decks", "Remodeling"];
   const grid = document.getElementById("gallery-grid");
   const filterBar = document.getElementById("filter-bar");
 
@@ -29,10 +29,10 @@
     const images = project.images
       .map(
         (img) => `
-      <div class="project-img">
+      <button type="button" class="project-img" aria-label="View larger photo: ${project.title} — ${img.label}">
         <span class="tag">${img.label}</span>
         <img src="${img.src}" alt="${project.title} — ${img.label}" loading="lazy">
-      </div>`
+      </button>`
       )
       .join("");
 
@@ -44,6 +44,61 @@
       </div>
       <div class="project-images">${images}</div>`;
     return div;
+  }
+
+  /* ---------------- Lightbox ---------------- */
+  let lightboxImages = [];
+  let lightboxIndex = 0;
+
+  const lb = document.createElement("div");
+  lb.className = "lightbox";
+  lb.innerHTML = `
+    <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+    <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous photo">&larr;</button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-img" src="" alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button type="button" class="lightbox-nav lightbox-next" aria-label="Next photo">&rarr;</button>`;
+  document.body.appendChild(lb);
+
+  const lbImg = lb.querySelector(".lightbox-img");
+  const lbCaption = lb.querySelector("figcaption");
+
+  function showLightbox(i) {
+    lightboxIndex = (i + lightboxImages.length) % lightboxImages.length;
+    const item = lightboxImages[lightboxIndex];
+    lbImg.src = item.src;
+    lbImg.alt = item.alt;
+    lbCaption.textContent = item.alt;
+    lb.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lb.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  lb.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+  lb.querySelector(".lightbox-prev").addEventListener("click", () => showLightbox(lightboxIndex - 1));
+  lb.querySelector(".lightbox-next").addEventListener("click", () => showLightbox(lightboxIndex + 1));
+  lb.addEventListener("click", (e) => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showLightbox(lightboxIndex - 1);
+    if (e.key === "ArrowRight") showLightbox(lightboxIndex + 1);
+  });
+
+  function wireLightboxTriggers() {
+    lightboxImages = Array.from(grid.querySelectorAll(".project-img img")).map((img) => ({
+      src: img.src,
+      alt: img.alt,
+    }));
+    grid.querySelectorAll(".project-img").forEach((btn, i) => {
+      btn.addEventListener("click", () => showLightbox(i));
+    });
   }
 
   function render(filter) {
@@ -76,6 +131,8 @@
     } else {
       grid.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
+
+    wireLightboxTriggers();
   }
 
   filterBar.addEventListener("click", (e) => {

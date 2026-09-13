@@ -6,7 +6,7 @@
   the grid individually.
 
   Each project:
-    category  — one of: "Roofing", "Electrical & Cameras", "Decks", "Remodeling"
+    category  — one of: "Roofing", "Electrical", "Decks", "Remodeling"
     title     — short project name
     summary   — one line describing the work
     images    — [{ src, label }], label is a short tag like "Before" / "After" /

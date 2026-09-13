@@ -14,7 +14,7 @@ No build step, no framework — plain HTML/CSS/JS, ready for GitHub Pages.
    ```js
    {
      src: "images/deck-rebuild-1.jpg",
-     category: "Decks", // one of: "Roofing", "Electrical & Cameras", "Decks", "Remodeling"
+     category: "Decks", // one of: "Roofing", "Electrical", "Decks", "Remodeling"
      caption: "Full deck rebuild — Franklin Lakes, NJ"
    },
    ```

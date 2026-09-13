@@ -31,24 +31,4 @@ const PHOTOS = [
     category: "Remodeling",
     caption: "After — full conversion to home office: barn doors, built-in cabinetry, refinished floors"
   },
-  {
-    src: "images/deck-rebuild-new-1.jpg",
-    category: "Decks",
-    caption: "New composite deck rebuild with aluminum railing"
-  },
-  {
-    src: "images/deck-rebuild-new-2.jpg",
-    category: "Decks",
-    caption: "New composite deck rebuild — multi-level stairs and railing"
-  },
-  {
-    src: "images/deck-rebuild-finished-1.jpg",
-    category: "Decks",
-    caption: "Finished deck, ready for outdoor living"
-  },
-  {
-    src: "images/deck-rebuild-finished-2.jpg",
-    category: "Decks",
-    caption: "Finished deck overlooking the backyard and pool"
-  },
 ];

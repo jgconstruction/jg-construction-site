@@ -16,5 +16,14 @@
 */
 
 const PHOTOS = [
-  // Add real project photos here, one object per photo.
+  {
+    src: "images/dining-to-office-before.jpg",
+    category: "Remodeling",
+    caption: "Before — formal dining room"
+  },
+  {
+    src: "images/dining-to-office-after.jpg",
+    category: "Remodeling",
+    caption: "After — full conversion to home office: barn doors, built-in cabinetry, refinished floors"
+  },
 ];

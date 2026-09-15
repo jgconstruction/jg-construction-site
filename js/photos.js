@@ -38,6 +38,15 @@ const PROJECTS = [
     ],
   },
   {
+    category: "Decks",
+    title: "Front Yard Deck with Built-In Step Lighting",
+    summary: "Recessed LED step lights wired into the stair risers for a lit, safe entrance at night.",
+    images: [
+      { src: "images/deck-frontyard-lighting-1.jpg", label: "Finished" },
+      { src: "images/deck-frontyard-lighting-2.jpg", label: "Finished" },
+    ],
+  },
+  {
     category: "Remodeling",
     title: "Bathroom Renovation",
     summary: "Full bathroom refresh — updated flooring, shower, and fixtures.",
